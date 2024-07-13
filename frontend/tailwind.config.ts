@@ -21,6 +21,9 @@ const config = {
 			primary: "var(--font-marcellus)",
 			secondary: "var(--font-urbanist)",
 		},
+		backgroundImage: {
+			hero: `url("/assets/hero/bg.jpg")`,
+		},
 		extend: {
 			colors: {
 				primary: {

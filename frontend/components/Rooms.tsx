@@ -12,7 +12,7 @@ const getRooms = async () => {
 const Rooms = async () => {
 	const rooms = await getRooms();
 	return (
-		<section>
+		<section id="rooms">
 			<div className="container mx-auto">
 				<RoomList rooms={rooms} />
 			</div>
