@@ -1,3 +1,5 @@
+import Reservation from "@/components/Reservation";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import Image from "next/image";
 import { TbArrowsMaximize, TbUsers } from "react-icons/tb";
 
@@ -9,8 +11,23 @@ const getRoomData = async ({ params }: { params: any }) => {
 	return await res.json();
 };
 
+const getReservationData = async () => {
+	const res = await fetch("http://127.0.0.1:1337/api/reservations?populate=*", {
+		next: {
+			revalidate: 0,
+		},
+	});
+	return await res.json();
+};
+
 const RoomDetails = async ({ params }: { params: any }) => {
 	const room = await getRoomData({ params });
+	const reservations = await getReservationData();
+	const { isAuthenticated, getUser } = getKindeServerSession();
+
+	const isUserAuthenticated = await isAuthenticated();
+	const userData = await getUser();
+
 	const imageURL = `http://127.0.0.1:1337${room.data.attributes.image.data.attributes.url}`;
 	return (
 		<section className="min-h-[70vh]">
@@ -60,8 +77,13 @@ const RoomDetails = async ({ params }: { params: any }) => {
 						</div>
 					</div>
 					{/* reservation  */}
-					<div className="w-full lg:max-w-[360px] h-max bg-green-300">
-						reservation
+					<div className="w-full lg:max-w-[360px] h-max ">
+						<Reservation
+							reservations={reservations}
+							room={room}
+							isUserAuthenticated={isUserAuthenticated}
+							userData={userData}
+						/>
 					</div>
 				</div>
 			</div>

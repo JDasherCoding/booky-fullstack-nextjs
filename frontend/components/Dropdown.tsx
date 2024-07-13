@@ -16,7 +16,7 @@ import { FaCalendarCheck, FaHome, FaSignOutAlt } from "react-icons/fa";
 import { DropdownMenuGroup } from "@radix-ui/react-dropdown-menu";
 
 const Dropdown = ({ user }: { user: any }) => {
-	console.log(user);
+	// console.log(user);
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
