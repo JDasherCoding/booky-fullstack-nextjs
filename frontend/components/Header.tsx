@@ -13,6 +13,7 @@ import {
 import { Button } from "./ui/button";
 import Dropdown from "./Dropdown";
 import MobileNav from "./MobileNav";
+import Nav from "./Nav";
 const socials = [
 	{ icon: <FaYoutube />, href: "#" },
 	{ icon: <FaFacebook />, href: "#" },
@@ -25,7 +26,6 @@ const Header = async () => {
 	const isUserAuthenticated = await isAuthenticated();
 
 	const user = await getUser();
-	console.log(user);
 	return (
 		<header className="py-6 shadow-md">
 			<div className="container mx-auto ">
@@ -79,7 +79,9 @@ const Header = async () => {
 							<MobileNav />
 						</div>
 						{/* desktop nav  */}
-						<div className="hidden xl:flex">Desktop nav</div>
+						<div className="hidden xl:flex">
+							<Nav isUserAuthenticated={isUserAuthenticated} />
+						</div>
 					</div>
 				</div>
 			</div>
